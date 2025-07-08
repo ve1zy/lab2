@@ -3,34 +3,38 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import EditText from '@/components/ui/EditText';
+
 interface LoginFormData {
   login: string;
   password: string;
 }
+
 interface LoginFormErrors {
   login?: string;
   password?: string;
 }
+
 const LoginPage: React.FC = () => {
   const [formData, setFormData] = useState<LoginFormData>({
     login: '',
-    password: ''
+    password: '',
   });
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleInputChange = (field: keyof LoginFormData) => (value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
-    // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [field]: undefined
+        [field]: undefined,
       }));
     }
   };
+
   const validateForm = (): boolean => {
     const newErrors: LoginFormErrors = {};
     if (!formData.login.trim()) {
@@ -42,30 +46,41 @@ const LoginPage: React.FC = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   const handleLogin = async () => {
     if (!validateForm()) return;
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      // Handle successful login here
-      console.log('Login successful:', formData);
-      // Redirect or handle success
-      // router.push('/dashboard');
+        const response = await fetch('http://127.0.0.1:8000/login/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username: formData.login,
+                password: formData.password,
+            }),
+            credentials: 'include', // Важно для работы с HTTP-only куками
+        });
+
+        if (response.ok) {
+            console.log('Авторизация успешна');
+            window.location.href = '/dashboard'; // Перенаправьте на защищенную страницу
+        } else {
+            const errorData = await response.json();
+            console.error('Ошибка авторизации:', errorData);
+            setErrors({ login: 'Неверный логин или пароль' });
+        }
     } catch (error) {
-      console.error('Login failed:', error);
-      setErrors({
-        login: 'Неверный логин или пароль'
-      });
+        console.error('Ошибка сети:', error);
+        setErrors({ login: 'Ошибка при подключении к серверу' });
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
-  };
+};
+
   const handleForgotPassword = () => {
-    // Handle forgot password functionality
-    console.log('Forgot password clicked');
-    // router.push('/forgot-password');
+    console.log('Забыли пароль?');
   };
+
   return (
     <div className="w-full min-h-screen bg-global-1 flex justify-start items-center">
       {/* Main Container */}
@@ -149,4 +164,5 @@ const LoginPage: React.FC = () => {
     </div>
   );
 };
+
 export default LoginPage;
