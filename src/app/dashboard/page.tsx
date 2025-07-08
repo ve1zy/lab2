@@ -32,21 +32,21 @@ const Dashboard: React.FC = () => {
 
   // Проверка авторизации
  useEffect(() => {
-  fetch('http://localhost:8000/check-auth/', {
-    method: 'GET',
-    credentials: 'include',
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error('Unauthorized');
-      return res.json();
+    fetch('http://localhost:8000/check-auth/', {
+      method: 'GET',
+      credentials: 'include',
     })
-    .then((data) => {
-      if (!data.authenticated) router.push('/login');
-    })
-    .catch(() => {
-      router.push('/login');
-    });
-}, [router]);
+      .then((res) => {
+        if (!res.ok) throw new Error('Unauthorized');
+        return res.json();
+      })
+      .then((data) => {
+        if (!data.authenticated) router.push('/login');
+      })
+      .catch(() => {
+        router.push('/login');
+      });
+  }, [router]);
 
 
 
