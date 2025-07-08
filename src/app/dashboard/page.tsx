@@ -31,12 +31,24 @@ const Dashboard: React.FC = () => {
   });
 
   // Проверка авторизации
-  useEffect(() => {
-  const token = document.cookie.split('; ').find((row) => row.startsWith('access_token='));
-  if (!token) {
-    router.push('/login'); // Перенаправляем на страницу входа, если токена нет
-  }
+ useEffect(() => {
+  fetch('http://localhost:8000/check-auth/', {
+    method: 'GET',
+    credentials: 'include',
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error('Unauthorized');
+      return res.json();
+    })
+    .then((data) => {
+      if (!data.authenticated) router.push('/login');
+    })
+    .catch(() => {
+      router.push('/login');
+    });
 }, [router]);
+
+
 
   const chartData: ChartDataPoint[] = [
     { name: 'Jan', visitors: 1200, sessions: 800, pageviews: 1500 },
