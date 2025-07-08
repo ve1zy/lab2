@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   menuItems = [
     { id: 'dashboard', label: 'Дашборд', href: '/dashboard', active: true },
     { id: 'settings', label: 'Настройки', href: '/settings' },
-    { id: 'logout', label: 'Выйти', onClick: () => console.log('Logout') }
+    { id: 'logout', label: 'Выйти', onClick: () => handleLogout() },
   ],
   logoSrc = '/images/img_sidebar_logo.svg',
   logoAlt = 'Logo',
@@ -37,6 +37,11 @@ const Sidebar: React.FC<SidebarProps> = ({
     if (onMenuItemClick) {
       onMenuItemClick(item);
     }
+  };
+
+  const handleLogout = () => {
+    document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    window.location.href = '/login';
   };
 
   return (
@@ -75,7 +80,6 @@ const Sidebar: React.FC<SidebarProps> = ({
           />
         </div>
       </div>
-
       {/* Menu Section */}
       <nav className="flex-1">
         <ul className="space-y-4 sm:space-y-6">

@@ -1,29 +1,43 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Button from '@/components/ui/Button';
 import Dropdown from '@/components/ui/Dropdown';
 import Sidebar from '@/components/common/Sidebar';
+
 interface ChartDataPoint {
   name: string;
   visitors: number;
   sessions: number;
   pageviews: number;
 }
+
 interface VisitorStats {
   total: number;
   growth: string;
   peakDecrease: string;
 }
+
 const Dashboard: React.FC = () => {
+  const router = useRouter();
   const [selectedDataSource, setSelectedDataSource] = useState('all');
   const [selectedTimePeriod, setSelectedTimePeriod] = useState('month');
   const [visitorStats, setVisitorStats] = useState<VisitorStats>({
     total: 1000,
     growth: '0.39%',
-    peakDecrease: '12,6%'
+    peakDecrease: '12.6%',
   });
+
+  // Проверка авторизации
+  useEffect(() => {
+    const token = document.cookie.split('; ').find((row) => row.startsWith('auth_token='));
+    if (!token) {
+      router.push('/login'); // Перенаправляем на страницу входа, если токена нет
+    }
+  }, [router]);
+
   const chartData: ChartDataPoint[] = [
     { name: 'Jan', visitors: 1200, sessions: 800, pageviews: 1500 },
     { name: 'Feb', visitors: 300, sessions: 200, pageviews: 400 },
@@ -31,39 +45,50 @@ const Dashboard: React.FC = () => {
     { name: 'Apr', visitors: 450, sessions: 300, pageviews: 600 },
     { name: 'May', visitors: 600, sessions: 400, pageviews: 800 },
     { name: 'Jun', visitors: 750, sessions: 550, pageviews: 1000 },
-    { name: 'Jul', visitors: 400, sessions: 250, pageviews: 500 }
+    { name: 'Jul', visitors: 400, sessions: 250, pageviews: 500 },
   ];
+
   const dataSourceOptions = [
     { value: 'all', label: 'все датчики' },
     { value: 'sensor1', label: 'датчик 1' },
     { value: 'sensor2', label: 'датчик 2' },
-    { value: 'sensor3', label: 'датчик 3' }
+    { value: 'sensor3', label: 'датчик 3' },
   ];
+
   const timePeriodOptions = [
     { value: 'week', label: 'за неделю' },
     { value: 'month', label: 'за месяц' },
     { value: 'quarter', label: 'за квартал' },
-    { value: 'year', label: 'за год' }
+    { value: 'year', label: 'за год' },
   ];
+
   const menuItems = [
     { id: 'dashboard', label: 'Дашборд', href: '/dashboard', active: true },
     { id: 'settings', label: 'Настройки', href: '/settings' },
-    { id: 'logout', label: 'Выйти', onClick: () => console.log('Logout clicked') }
+    { id: 'logout', label: 'Выйти', onClick: () => handleLogout() },
   ];
+
   useEffect(() => {
-    // Simulate data updates based on filters
+    // Симуляция обновления данных на основе фильтров
     const updateStats = () => {
       setVisitorStats({
         total: Math.floor(Math.random() * 2000) + 500,
         growth: (Math.random() * 5).toFixed(2) + '%',
-        peakDecrease: (Math.random() * 20 + 5).toFixed(1) + '%'
+        peakDecrease: (Math.random() * 20 + 5).toFixed(1) + '%',
       });
     };
     updateStats();
   }, [selectedDataSource, selectedTimePeriod]);
+
   const handleMenuItemClick = (item: any) => {
     console.log('Menu item clicked:', item);
   };
+
+  const handleLogout = () => {
+    document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    window.location.href = '/login'; // Перенаправляем на страницу входа после выхода
+  };
+
   return (
     <div className="min-h-screen bg-global-1 flex">
       {/* Sidebar */}
@@ -72,6 +97,7 @@ const Dashboard: React.FC = () => {
         onMenuItemClick={handleMenuItemClick}
         className="hidden lg:block"
       />
+
       {/* Main Content */}
       <div className="flex-1 lg:ml-80">
         {/* Header */}
@@ -85,6 +111,7 @@ const Dashboard: React.FC = () => {
             </Button>
           </div>
         </header>
+
         {/* Dashboard Content */}
         <main className="p-4 sm:p-6">
           <div className="bg-global-2 border border-sidebar-1 rounded-lg p-4 sm:p-6">
@@ -123,23 +150,23 @@ const Dashboard: React.FC = () => {
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                      <XAxis 
-                        dataKey="name" 
+                      <XAxis
+                        dataKey="name"
                         axisLine={false}
                         tickLine={false}
                         tick={{ fontSize: 12, fill: '#637381' }}
                       />
-                      <YAxis 
+                      <YAxis
                         axisLine={false}
                         tickLine={false}
                         tick={{ fontSize: 12, fill: '#637381' }}
                       />
-                      <Tooltip 
+                      <Tooltip
                         contentStyle={{
                           backgroundColor: '#ffffff',
                           border: '1px solid #e0e0e0',
                           borderRadius: '8px',
-                          fontSize: '14px'
+                          fontSize: '14px',
                         }}
                       />
                       <Bar dataKey="visitors" fill="#4F46E5" radius={[2, 2, 0, 0]} />
@@ -228,4 +255,5 @@ const Dashboard: React.FC = () => {
     </div>
   );
 };
+
 export default Dashboard;

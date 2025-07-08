@@ -8,7 +8,6 @@ interface LoginFormData {
   login: string;
   password: string;
 }
-
 interface LoginFormErrors {
   login?: string;
   password?: string;
@@ -48,33 +47,34 @@ const LoginPage: React.FC = () => {
   };
 
   const handleLogin = async () => {
-    if (!validateForm()) return;
-    setIsLoading(true);
-    try {
-        const response = await fetch('http://127.0.0.1:8000/login/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                username: formData.login,
-                password: formData.password,
-            }),
-            credentials: 'include', // Важно для работы с HTTP-only куками
-        });
+  if (!validateForm()) return;
+  setIsLoading(true);
 
-        if (response.ok) {
-            console.log('Авторизация успешна');
-            window.location.href = '/dashboard'; // Перенаправьте на защищенную страницу
-        } else {
-            const errorData = await response.json();
-            console.error('Ошибка авторизации:', errorData);
-            setErrors({ login: 'Неверный логин или пароль' });
-        }
-    } catch (error) {
-        console.error('Ошибка сети:', error);
-        setErrors({ login: 'Ошибка при подключении к серверу' });
-    } finally {
-        setIsLoading(false);
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/login/', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			username: formData.login,
+			password: formData.password,
+		}),
+		credentials: 'include', // Важно для работы с HTTP-only куками
+		});	
+
+    if (response.ok) {
+      console.log('Авторизация успешна');
+      window.location.href = '/dashboard'; // Перенаправление на защищенную страницу
+    } else {
+      const errorData = await response.json();
+      console.error('Ошибка авторизации:', errorData);
+      setErrors({ login: 'Неверный логин или пароль' });
     }
+  } catch (error) {
+    console.error('Ошибка сети:', error);
+    setErrors({ login: 'Ошибка при подключении к серверу' });
+  } finally {
+    setIsLoading(false);
+  }
 };
 
   const handleForgotPassword = () => {
@@ -86,80 +86,82 @@ const LoginPage: React.FC = () => {
       {/* Main Container */}
       <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-14 pt-64 pb-8">
         {/* Login Card */}
-        <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-global-2 border border-[#b5000333] rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0px_4px_15px_#888888ff] p-8 sm:p-10 md:p-12 lg:p-14 xl:p-16">
-          {/* Header Section */}
-          <div className="flex flex-col items-end mb-4 sm:mb-6 lg:mb-8">
-            {/* 5G Logo */}
-            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-4 sm:mb-6">
-              <Image
-                src="/images/img_material_symbol.svg"
-                alt="5G Logo"
-                width={64}
-                height={52}
-                className="w-full h-full object-contain"
-                priority
-              />
-            </div>
-            {/* Login Form Container */}
-            <div className="w-full -mt-8 sm:-mt-10">
-              {/* Title */}
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-global-2 mb-6 sm:mb-8 lg:mb-10 font-mono">
-                Вход
-              </h1>
-              {/* Form Fields */}
-              <div className="space-y-6 sm:space-y-8 lg:space-y-10 mb-8 sm:mb-10 lg:mb-12">
-                {/* Login Field */}
-                <div className="space-y-2 sm:space-y-3">
-                  <label className="block text-sm sm:text-base font-mono text-global-1">
-                    Логин
-                  </label>
-                  <EditText
-                    value={formData.login}
-                    onChange={handleInputChange('login')}
-                    placeholder=""
-                    type="text"
-                    autoComplete="username"
-                    error={errors.login}
-                    className="border-edittext-1 focus:border-edittext-1"
-                  />
-                </div>
-                {/* Password Field */}
-                <div className="space-y-2 sm:space-y-3">
-                  <label className="block text-sm sm:text-base font-mono text-global-1">
-                    Пароль
-                  </label>
-                  <EditText
-                    value={formData.password}
-                    onChange={handleInputChange('password')}
-                    placeholder=""
-                    type="password"
-                    autoComplete="current-password"
-                    error={errors.password}
-                    className="border-[#dfe4ea] focus:border-button-1"
-                  />
-                </div>
-                {/* Login Button */}
-                <Button
-                  onClick={handleLogin}
-                  disabled={isLoading}
-                  loading={isLoading}
-                  fullWidth
-                  size="lg"
-                  className="bg-button-1 text-button-1 hover:bg-[#a00003] font-medium text-base sm:text-lg py-3 sm:py-4"
-                >
-                  Войти
-                </Button>
+        <form onSubmit={handleLogin}> {/* Оборачиваем форму */}
+          <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-global-2 border border-[#b5000333] rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0px_4px_15px_#888888ff] p-8 sm:p-10 md:p-12 lg:p-14 xl:p-16">
+            {/* Header Section */}
+            <div className="flex flex-col items-end mb-4 sm:mb-6 lg:mb-8">
+              {/* 5G Logo */}
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-4 sm:mb-6">
+                <Image
+                  src="/images/img_material_symbol.svg"
+                  alt="5G Logo"
+                  width={64}
+                  height={52}
+                  className="w-full h-full object-contain"
+                  priority
+                />
               </div>
-              {/* Forgot Password Link */}
-              <button
-                onClick={handleForgotPassword}
-                className="text-sm sm:text-base font-mono text-global-3 hover:text-global-1 transition-colors duration-200 focus:outline-none focus:underline"
-              >
-                Забыли пароль?
-              </button>
+              {/* Login Form Container */}
+              <div className="w-full -mt-8 sm:-mt-10">
+                {/* Title */}
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-global-2 mb-6 sm:mb-8 lg:mb-10 font-mono">
+                  Вход
+                </h1>
+                {/* Form Fields */}
+                <div className="space-y-6 sm:space-y-8 lg:space-y-10 mb-8 sm:mb-10 lg:mb-12">
+                  {/* Login Field */}
+                  <div className="space-y-2 sm:space-y-3">
+                    <label className="block text-sm sm:text-base font-mono text-global-1">
+                      Логин
+                    </label>
+                    <EditText
+                      value={formData.login}
+                      onChange={handleInputChange('login')}
+                      placeholder=""
+                      type="text"
+                      autoComplete="username"
+                      error={errors.login}
+                      className="border-edittext-1 focus:border-edittext-1"
+                    />
+                  </div>
+                  {/* Password Field */}
+                  <div className="space-y-2 sm:space-y-3">
+                    <label className="block text-sm sm:text-base font-mono text-global-1">
+                      Пароль
+                    </label>
+                    <EditText
+                      value={formData.password}
+                      onChange={handleInputChange('password')}
+                      placeholder=""
+                      type="password"
+                      autoComplete="current-password"
+                      error={errors.password}
+                      className="border-[#dfe4ea] focus:border-button-1"
+                    />
+                  </div>
+                  {/* Login Button */}
+                  <Button
+                    type="submit" // Убедитесь, что кнопка отправляет форму
+                    disabled={isLoading}
+                    loading={isLoading}
+                    fullWidth
+                    size="lg"
+                    className="bg-button-1 text-button-1 hover:bg-[#a00003] font-medium text-base sm:text-lg py-3 sm:py-4"
+                  >
+                    Войти
+                  </Button>
+                </div>
+                {/* Forgot Password Link */}
+                <button
+                  onClick={handleForgotPassword}
+                  className="text-sm sm:text-base font-mono text-global-3 hover:text-global-1 transition-colors duration-200 focus:outline-none focus:underline"
+                >
+                  Забыли пароль?
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
