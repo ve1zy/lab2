@@ -32,11 +32,11 @@ const Dashboard: React.FC = () => {
 
   // Проверка авторизации
   useEffect(() => {
-    const token = document.cookie.split('; ').find((row) => row.startsWith('auth_token='));
-    if (!token) {
-      router.push('/login'); // Перенаправляем на страницу входа, если токена нет
-    }
-  }, [router]);
+  const token = document.cookie.split('; ').find((row) => row.startsWith('access_token='));
+  if (!token) {
+    router.push('/login'); // Перенаправляем на страницу входа, если токена нет
+  }
+}, [router]);
 
   const chartData: ChartDataPoint[] = [
     { name: 'Jan', visitors: 1200, sessions: 800, pageviews: 1500 },

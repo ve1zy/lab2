@@ -51,23 +51,25 @@ const LoginPage: React.FC = () => {
   setIsLoading(true);
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/login/', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({
-			username: formData.login,
-			password: formData.password,
-		}),
-		credentials: 'include', // Важно для работы с HTTP-only куками
-		});	
+    const response = await fetch('http://127.0.0.1:8000/login/', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    username: formData.login,
+    password: formData.password,
+  }),
+  credentials: 'include', // Для работы с cookies
+});
+
+    console.log('Response:', response); // Логируем объект response
 
     if (response.ok) {
       console.log('Авторизация успешна');
-      window.location.href = '/dashboard'; // Перенаправление на защищенную страницу
+      window.location.href = '/dashboard';
     } else {
       const errorData = await response.json();
       console.error('Ошибка авторизации:', errorData);
-      setErrors({ login: 'Неверный логин или пароль' });
+      setErrors({ login: errorData.detail || 'Неверный логин или пароль' });
     }
   } catch (error) {
     console.error('Ошибка сети:', error);
@@ -86,7 +88,10 @@ const LoginPage: React.FC = () => {
       {/* Main Container */}
       <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-14 pt-64 pb-8">
         {/* Login Card */}
-        <form onSubmit={handleLogin}> {/* Оборачиваем форму */}
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin();
+        }}>
           <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-global-2 border border-[#b5000333] rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0px_4px_15px_#888888ff] p-8 sm:p-10 md:p-12 lg:p-14 xl:p-16">
             {/* Header Section */}
             <div className="flex flex-col items-end mb-4 sm:mb-6 lg:mb-8">
@@ -121,7 +126,7 @@ const LoginPage: React.FC = () => {
                       type="text"
                       autoComplete="username"
                       error={errors.login}
-                      className="border-edittext-1 focus:border-edittext-1"
+                      className={`border ${errors.login ? 'border-red-500' : 'border-edittext-1'} focus:border-edittext-1`}
                     />
                   </div>
                   {/* Password Field */}
@@ -136,19 +141,19 @@ const LoginPage: React.FC = () => {
                       type="password"
                       autoComplete="current-password"
                       error={errors.password}
-                      className="border-[#dfe4ea] focus:border-button-1"
+                      className={`border ${errors.password ? 'border-red-500' : 'border-[#dfe4ea]'} focus:border-button-1`}
                     />
                   </div>
                   {/* Login Button */}
                   <Button
-                    type="submit" // Убедитесь, что кнопка отправляет форму
+                    type="submit"
                     disabled={isLoading}
                     loading={isLoading}
                     fullWidth
                     size="lg"
                     className="bg-button-1 text-button-1 hover:bg-[#a00003] font-medium text-base sm:text-lg py-3 sm:py-4"
                   >
-                    Войти
+                    {isLoading ? 'Входим...' : 'Войти'}
                   </Button>
                 </div>
                 {/* Forgot Password Link */}

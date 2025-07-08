@@ -39,10 +39,19 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
-  const handleLogout = () => {
-    document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  const handleLogout = async () => {
+  try {
+    await fetch('http://localhost:8000/logout/', {
+      method: 'POST',
+      credentials: 'include', // Важно для отправки cookies
+    });
+    document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     window.location.href = '/login';
-  };
+  } catch (err) {
+    console.error('Ошибка при выходе:', err);
+  }
+};
 
   return (
     <aside
