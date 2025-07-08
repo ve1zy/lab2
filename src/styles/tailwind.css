@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Global Colors */
+    --global-bg-1: #b500030c;
+    --global-bg-2: #ffffff;
+    --global-text-1: #111928;
+    --global-text-2: #212b36;
+    --global-text-3: #637381;
+
+    /* Button Colors */
+    --button-bg-1: #b50003;
+    --button-text-1: #ffffff;
+
+    /* EditText Colors */
+    --edittext-border-1: #b50003;
+    --edittext-bg-1: #ffffff;
+  }
+}
+
+@layer utilities {
+  /* Global */
+  .bg-global-1 {
+    background-color: var(--global-bg-1);
+  }
+  .bg-global-2 {
+    background-color: var(--global-bg-2);
+  }
+  .text-global-1 {
+    color: var(--global-text-1);
+  }
+  .text-global-2 {
+    color: var(--global-text-2);
+  }
+  .text-global-3 {
+    color: var(--global-text-3);
+  }
+
+  /* Button */
+  .bg-button-1 {
+    background-color: var(--button-bg-1);
+  }
+  .text-button-1 {
+    color: var(--button-text-1);
+  }
+
+  /* EditText */
+  .border-edittext-1 {
+    border-color: var(--edittext-border-1);
+  }
+  .bg-edittext-1 {
+    background-color: var(--edittext-bg-1);
+  }
+}
