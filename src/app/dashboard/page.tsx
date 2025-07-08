@@ -115,12 +115,11 @@ const Dashboard: React.FC = () => {
         {/* Header */}
         <header className="bg-global-2 border-b border-sidebar-1 p-4 sm:p-6">
           <div className="w-full">
-            <Button
-              variant="outline"
+            <div
               className="w-full text-center text-lg sm:text-xl font-anonymous-pro font-normal tracking-[25px] text-sidebar-1 border border-sidebar-1 rounded-lg px-8 py-4"
             >
               ZENCOUNT WEB PANEL
-            </Button>
+            </div>
           </div>
         </header>
 
