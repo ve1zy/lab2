@@ -1,3 +1,4 @@
+'use client'; // Добавляем эту строку
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Dropdown from '@/components/ui/Dropdown';
@@ -38,14 +39,12 @@ const ChartSection: React.FC<ChartSectionProps> = ({
       <h2 className="text-lg sm:text-xl font-anonymous-pro font-bold tracking-wider text-global-1 mb-6">
         График посещений
       </h2>
-
       <FilterControls
         selectedDataSource={selectedDataSource}
         setSelectedDataSource={setSelectedDataSource}
         selectedTimePeriod={selectedTimePeriod}
         setSelectedTimePeriod={setSelectedTimePeriod}
       />
-
       <div className="w-full h-64 sm:h-80 mt-8">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
@@ -75,4 +74,4 @@ const ChartSection: React.FC<ChartSectionProps> = ({
   );
 };
 
-export default ChartSection;
+export default ChartSection;	

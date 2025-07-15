@@ -9,6 +9,7 @@ interface LoginFormData {
   login: string;
   password: string;
 }
+
 interface LoginFormErrors {
   login?: string;
   password?: string;
@@ -16,24 +17,14 @@ interface LoginFormErrors {
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
-
-  const [formData, setFormData] = useState<LoginFormData>({
-    login: '',
-    password: '',
-  });
+  const [formData, setFormData] = useState<LoginFormData>({ login: '', password: '' });
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleInputChange = (field: keyof LoginFormData) => (value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors((prev) => ({
-        ...prev,
-        [field]: undefined,
-      }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
 
@@ -47,18 +38,16 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = async () => {
     if (!validateForm()) return;
+
     setIsLoading(true);
-    setErrors({}); // очищаем старые ошибки
+    setErrors({});
 
     try {
       const response = await fetch('http://localhost:8000/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({
-          username: formData.login,
-          password: formData.password,
-        }),
+        body: JSON.stringify({ username: formData.login, password: formData.password }),
       });
 
       if (response.ok) {
@@ -70,9 +59,7 @@ const LoginPage: React.FC = () => {
         }
       } else {
         const errorData = await response.json();
-        setErrors({
-          login: errorData?.detail || 'Ошибка авторизации',
-        });
+        setErrors({ login: errorData?.detail || 'Ошибка авторизации' });
       }
     } catch (error) {
       console.error('Ошибка сети:', error);
@@ -87,7 +74,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-global-1 flex justify-start items-center">
+            <div className="w-full min-h-screen bg-global-1 flex justify-start items-center">
       <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-14 pt-64 pb-8">
         <form
           onSubmit={(e) => {
