@@ -1,97 +1,97 @@
-# Next.js with TypeScript and Tailwind CSS
+# Zencount Web Panel
 
-A modern Next.js 14 application built with TypeScript and Tailwind CSS.
+Zencount Web Panel - это веб-приложение для мониторинга посещаемости и аналитики с использованием Next.js, TypeScript и Tailwind CSS.
 
-## 🚀 Features
+## О проекте
 
-- **Next.js 14** - Latest version with improved performance and features
-- **React 18** - Latest React version with enhanced capabilities
-- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
+Проект представляет собой административную панель с функциями:
+- Просмотр статистики посещений
+- Детализация данных по различным источникам
+- Визуализация данных через графики
+- Система аутентификации пользователей
 
-## 📋 Prerequisites
+## Технологический стек
 
-- Node.js (v14.x or higher)
-- npm or yarn
+- **Next.js 14**
+- **React 18**
+- **TypeScript**
+- **Tailwind CSS**
+- **Recharts** (для визуализации данных)
 
+## Установка и запуск
 
-## 🛠️ Installation
+### Предварительные требования
 
-1. Install dependencies:
-  ```bash
-  npm install
-  # or
-  yarn install
-  ```
+- Node.js (v14.x или выше)
+- npm или yarn
 
-2. Start the development server:
-  ```bash
-  npm run dev
-  # or
-  yarn dev
-  ```
-3. Open [http://localhost:4028](http://localhost:4028) with your browser to see the result.
+### Шаги установки
 
-## 📁 Project Structure
-
+1. Клонируйте репозиторий:
+   ```bash
+   git clone [URL_репозитория]
+   cd zencount-web-panel
+   ```
+2. Установите зависимости:
+	```bash
+	npm install
+	# или
+	yarn install
+	```
+3. Запустите сервер разработки:
+	```
+	npm run dev
+	# или
+	yarn dev
+	```
+4. Откройте приложение в браузере:
+	```
+	http://localhost:4028
+	```
+## Структура проекта
 ```
 nextjs-js-tailwind/
-├── public/             # Static assets
+├── public/             # Статические файлы
 ├── src/
-│   ├── app/            # App router components
-│   │   ├── layout.tsx  # Root layout component
-│   │   └── page.tsx    # Main page component
-│   ├── components/     # Reusable UI components
-│   ├── styles/         # Global styles and Tailwind configuration
-├── next.config.mjs     # Next.js configuration
-├── package.json        # Project dependencies and scripts
-├── postcss.config.js   # PostCSS configuration
-└── tailwind.config.js  # Tailwind CSS configuration
-
+│   ├── app/            # Компоненты маршрутизации приложения
+│   │   ├── dashboard/  # Компоненты панели управления
+│   │   ├── login/      # Страница авторизации
+│   │   ├── layout.tsx  # Корневой компонент макета
+│   │   └── page.tsx    # Главная страница
+│   ├── components/     # Повторно используемые компоненты UI
+│   ├── styles/         # Глобальные стили и конфигурация Tailwind
+├── next.config.mjs     # Конфигурация Next.js
+├── package.json        # Зависимости проекта и скрипты
+├── postcss.config.js   # Конфигурация PostCSS
+└── tailwind.config.js  # Конфигурация Tailwind CSS
 ```
-
-## 🧩 Page Editing
-
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
-
-## 🎨 Styling
-
-This project uses Tailwind CSS for styling with the following features:
-- Utility-first approach for rapid development
-- Custom theme configuration
-- Responsive design utilities
-- PostCSS and Autoprefixer integration
-
-## 📦 Available Scripts
-
-- `npm run dev` - Start development server on port 4028
-- `npm run build` - Build the application for production
-- `npm run start` - Start the development server
-- `npm run serve` - Start the production server
-- `npm run lint` - Run ESLint to check code quality
-- `npm run lint:fix` - Fix ESLint issues automatically
-- `npm run format` - Format code with Prettier
-
-## 📱 Deployment
-
-Build the application for production:
-
-  ```bash
-  npm run build
-  ```
-
-## 📚 Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial
-
-You can check out the [Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## 🙏 Acknowledgments
-
-- Built with [Rocket.new](https://rocket.new)
-- Powered by Next.js and React
-- Styled with Tailwind CSS
-
-Built with ❤️ on Rocket.new
+## Инструкция по использованию
+### Авторизация
+- **Перейдите на /login**
+- **Используйте тестовые учетные данные:**
+	- **Логин: pasha**
+	- **Пароль: ads123456**
+### Панель управления
+После входа вы получите доступ к:
+- **Графикам посещаемости**
+- **Фильтрам по периодам и источникам данных**
+- **Статистическим данным**
+## Доступные команды
+- **npm run dev - Запуск сервера разработки**
+- **npm run build - Сборка проекта для production**
+- **npm run start - Запуск production сервера**
+- **npm run lint - Проверка кода ESLint**
+- **npm run format - Форматирование кода Prettier**
+## Зависимости
+### Основные зависимости:
+- **next: "^14.2.0"**
+- **react: "^18.2.0"**
+- **recharts: "^2.15.2"**
+- **tailwindcss: "^3.4.6"**
+### Дополнительные зависимости:
+- **@dhiwise/component-tagger: "^1.0.9"**
+- **@tailwindcss/typography: "^0.5.16"**
+## Авторы
+Павел Жуков Алексеевич
+- **Email: zhukowgg@gmail.com**
+- **Telegram: @wtfimcryin**

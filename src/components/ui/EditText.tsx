@@ -65,10 +65,10 @@ const EditText: React.FC<EditTextProps> = ({
   `;
 
   const stateClasses = disabled
-    ? 'opacity-50 cursor-not-allowed bg-gray-100' :'hover:border-button-1';
+    ? 'opacity-50 cursor-not-allowed bg-gray-100'
+    : 'hover:border-button-1';
 
-  const errorClasses = error
-    ? 'border-red-500 focus:ring-red-500 focus:border-red-500' :'';
+  const errorClasses = error ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : '';
 
   return (
     <div className="w-full">
@@ -97,14 +97,12 @@ const EditText: React.FC<EditTextProps> = ({
           ${stateClasses}
           ${errorClasses}
           ${className}
-        `.trim().replace(/\s+/g, ' ')}
+        `
+          .trim()
+          .replace(/\s+/g, ' ')}
         {...props}
       />
-      {error && (
-        <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-500">
-          {error}
-        </p>
-      )}
+      {error && <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-500">{error}</p>}
     </div>
   );
 };

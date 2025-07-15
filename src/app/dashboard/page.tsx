@@ -14,7 +14,7 @@ const Dashboard: React.FC = () => {
     growth: '0.39%',
     peakDecrease: '12.6%',
   });
-const handleLogout = async () => {
+  const handleLogout = async () => {
     try {
       await fetch('http://localhost:8000/logout/', {
         method: 'POST',
@@ -55,13 +55,13 @@ const handleLogout = async () => {
 
         <main className="p-4 sm:p-6">
           <div className="bg-global-2 border border-sidebar-1 rounded-lg p-4 sm:p-6">
-            <ChartSection 
+            <ChartSection
               selectedDataSource={selectedDataSource}
               setSelectedDataSource={setSelectedDataSource}
               selectedTimePeriod={selectedTimePeriod}
               setSelectedTimePeriod={setSelectedTimePeriod}
             />
-            
+
             <StatsSection visitorStats={visitorStats} />
           </div>
         </main>

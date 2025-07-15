@@ -12,7 +12,7 @@ const FilterControls: React.FC<FilterControlsProps> = ({
   selectedDataSource,
   setSelectedDataSource,
   selectedTimePeriod,
-  setSelectedTimePeriod
+  setSelectedTimePeriod,
 }) => {
   const dataSourceOptions = [
     { value: 'all', label: 'все датчики' },
@@ -28,27 +28,27 @@ const FilterControls: React.FC<FilterControlsProps> = ({
     { value: 'year', label: 'за год' },
   ];
 
-  return (	
-<div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-end">
-  <div className="w-full sm:w-48">
-    <Dropdown
-      options={dataSourceOptions}
-      value={selectedDataSource}
-      onChange={setSelectedDataSource}
-      placeholder="все датчики"
-      className="text-sm"
-    />
-  </div>
-  <div className="w-full sm:w-40">
-    <Dropdown
-      options={timePeriodOptions}
-      value={selectedTimePeriod}
-      onChange={setSelectedTimePeriod}
-      placeholder="за месяц"
-      className="text-sm"
-    />
-  </div>
-</div>
+  return (
+    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-end">
+      <div className="w-full sm:w-48">
+        <Dropdown
+          options={dataSourceOptions}
+          value={selectedDataSource}
+          onChange={setSelectedDataSource}
+          placeholder="все датчики"
+          className="text-sm"
+        />
+      </div>
+      <div className="w-full sm:w-40">
+        <Dropdown
+          options={timePeriodOptions}
+          value={selectedTimePeriod}
+          onChange={setSelectedTimePeriod}
+          placeholder="за месяц"
+          className="text-sm"
+        />
+      </div>
+    </div>
   );
 };
 

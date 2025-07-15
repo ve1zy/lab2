@@ -40,7 +40,9 @@ const Sidebar: React.FC<SidebarProps> = ({
     <aside
       className={`
         fixed left-0 top-0 h-full w-64 sm:w-72 lg:w-80 bg-sidebar-1 border-r border-sidebar-1 shadow-sidebar flex flex-col pt-12 sm:pt-16 px-3 sm:px-4 z-40 transform transition-transform duration-300 ease-in-out ${className}
-      `.trim().replace(/\s+/g, ' ')}
+      `
+        .trim()
+        .replace(/\s+/g, ' ')}
       {...props}
     >
       {/* Logo Section */}
@@ -59,7 +61,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onClick={() => handleMenuClick(item)}
                 className={`
                   w-full px-3 py-3 sm:px-4 sm:py-4 text-left text-sm sm:text-base font-anonymous-pro font-normal tracking-wider text-sidebar-1 bg-sidebar-1 rounded transition-all duration-200 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-button-1 focus:ring-opacity-50 min-h-[44px] sm:min-h-[48px] touch-manipulation flex items-center ${item.active ? 'bg-gray-50 font-medium' : ''} ${index > 0 ? 'mt-4 sm:mt-6' : ''}
-                `.trim().replace(/\s+/g, ' ')}
+                `
+                  .trim()
+                  .replace(/\s+/g, ' ')}
                 role="menuitem"
                 tabIndex={0}
               >

@@ -57,7 +57,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
   };
 
-  const selectedOption = options.find(option => option.value === selectedValue);
+  const selectedOption = options.find((option) => option.value === selectedValue);
   const displayText = selectedOption ? selectedOption.label : placeholder;
 
   const baseClasses = `
@@ -86,10 +86,10 @@ const Dropdown: React.FC<DropdownProps> = ({
   `;
 
   const stateClasses = disabled
-    ? 'opacity-50 cursor-not-allowed bg-gray-100' :'hover:border-button-1';
+    ? 'opacity-50 cursor-not-allowed bg-gray-100'
+    : 'hover:border-button-1';
 
-  const errorClasses = error
-    ? 'border-red-500 focus:ring-red-500 focus:border-red-500' :'';
+  const errorClasses = error ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : '';
 
   return (
     <div className="w-full">
@@ -110,7 +110,9 @@ const Dropdown: React.FC<DropdownProps> = ({
             ${stateClasses}
             ${errorClasses}
             ${className}
-          `.trim().replace(/\s+/g, ' ')}
+          `
+            .trim()
+            .replace(/\s+/g, ' ')}
           role="combobox"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
@@ -136,12 +138,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
 
@@ -175,11 +172,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           </div>
         )}
       </div>
-      {error && (
-        <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-500">
-          {error}
-        </p>
-      )}
+      {error && <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-red-500">{error}</p>}
     </div>
   );
 };
