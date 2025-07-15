@@ -1,4 +1,3 @@
-// src/components/common/Sidebar.tsx
 'use client';
 import React from 'react';
 import Image from 'next/image';
@@ -12,7 +11,7 @@ interface MenuItem {
 }
 
 interface SidebarProps {
-  menuItems: MenuItem[]; // Убираем значение по умолчанию
+  menuItems: MenuItem[];
   logoSrc?: string;
   logoAlt?: string;
   className?: string;
@@ -29,10 +28,10 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const handleMenuClick = (item: MenuItem) => {
     if (item.onClick) {
-      item.onClick(); // Вызываем onClick, если он определен
+      item.onClick();
     }
     if (onMenuItemClick) {
-      onMenuItemClick(item); // Вызываем внешний обработчик, если он передан
+      onMenuItemClick(item);
     }
   };
 
@@ -45,14 +44,11 @@ const Sidebar: React.FC<SidebarProps> = ({
         .replace(/\s+/g, ' ')}
       {...props}
     >
-      {/* Logo Section */}
       <div className="flex justify-center mb-8 sm:mb-12">
         <div className="w-12 h-10 sm:w-14 sm:h-12 relative">
           <Image src={logoSrc} alt={logoAlt} fill className="object-contain" priority />
         </div>
       </div>
-
-      {/* Menu Section */}
       <nav className="flex-1">
         <ul className="space-y-4 sm:space-y-6">
           {menuItems.map((item, index) => (

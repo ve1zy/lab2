@@ -27,5 +27,11 @@ export const useDashboard = () => {
     updateStats();
   }, [selectedDataSource, selectedTimePeriod]);
 
-  return { selectedDataSource, setSelectedDataSource, selectedTimePeriod, setSelectedTimePeriod, visitorStats };
+  return {
+    selectedDataSource,
+    setSelectedDataSource,
+    selectedTimePeriod,
+    setSelectedTimePeriod,
+    visitorStats,
+  };
 };

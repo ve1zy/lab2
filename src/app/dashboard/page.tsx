@@ -4,12 +4,17 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import Header from '@/components/dashboard/Header';
 import ChartSection from '@/components/dashboard/ChartSection';
 import StatsSection from '@/components/dashboard/StatsSection';
-import { useDashboard } from '@/hooks/useDashboard'; // Именованный импорт
+import { useDashboard } from '@/hooks/useDashboard';
 import { useAuth } from '@/hooks/useAuth';
 
 const Dashboard: React.FC = () => {
-  const { selectedDataSource, setSelectedDataSource, selectedTimePeriod, setSelectedTimePeriod, visitorStats } =
-    useDashboard();
+  const {
+    selectedDataSource,
+    setSelectedDataSource,
+    selectedTimePeriod,
+    setSelectedTimePeriod,
+    visitorStats,
+  } = useDashboard();
   const { handleLogout } = useAuth();
 
   const menuItems = [

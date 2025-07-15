@@ -1,5 +1,4 @@
-'use client'; // Добавляем эту строку
-import { useState } from 'react';
+'use client';
 import { useRouter } from 'next/navigation';
 
 interface AuthResponse {
@@ -10,7 +9,10 @@ interface AuthResponse {
 export const useAuth = () => {
   const router = useRouter();
 
-  const handleLogin = async (username: string, password: string): Promise<{ success: boolean; error?: string }> => {
+  const handleLogin = async (
+    username: string,
+    password: string
+  ): Promise<{ success: boolean; error?: string }> => {
     try {
       const response = await fetch('http://localhost:8000/login/', {
         method: 'POST',

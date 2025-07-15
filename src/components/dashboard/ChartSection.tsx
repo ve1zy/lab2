@@ -1,7 +1,6 @@
-'use client'; // Добавляем эту строку
+'use client';
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import Dropdown from '@/components/ui/Dropdown';
 import FilterControls from '@/components/dashboard/FilterControls';
 
 interface ChartDataPoint {
@@ -74,4 +73,4 @@ const ChartSection: React.FC<ChartSectionProps> = ({
   );
 };
 
-export default ChartSection;	
+export default ChartSection;

@@ -74,7 +74,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-            <div className="w-full min-h-screen bg-global-1 flex justify-start items-center">
+    <div className="w-full min-h-screen bg-global-1 flex justify-start items-center">
       <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-14 pt-64 pb-8">
         <form
           onSubmit={(e) => {

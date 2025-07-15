@@ -34,7 +34,6 @@ const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElemen
     danger: 'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus:ring-red-500',
   };
 
-  // Mobile-first responsive sizes
   const sizes = {
     xs: 'px-2 py-1 text-xs sm:px-2.5 sm:py-1.5 sm:text-xs',
     sm: 'px-2.5 py-1.5 text-xs sm:px-3 sm:py-2 sm:text-sm md:text-sm',
@@ -43,13 +42,10 @@ const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElemen
     xl: 'px-5 py-3 text-lg sm:px-6 sm:py-4 sm:text-xl md:text-xl lg:text-2xl',
   };
 
-  // Responsive border radius
   const responsiveRadius = 'rounded sm:rounded-md';
 
-  // Responsive focus ring
   const responsiveFocus = 'focus:ring-2 sm:focus:ring-2 md:focus:ring-4';
 
-  // Loading spinner component
   const LoadingSpinner = () => (
     <svg
       className="animate-spin h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3"

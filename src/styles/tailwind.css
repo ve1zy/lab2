@@ -4,25 +4,21 @@
 
 @layer base {
   :root {
-    /* Global Colors */
     --global-bg-1: #b500030c;
     --global-bg-2: #ffffff;
     --global-text-1: #111928;
     --global-text-2: #212b36;
     --global-text-3: #637381;
 
-    /* Button Colors */
     --button-bg-1: #b50003;
     --button-text-1: #ffffff;
 
-    /* EditText Colors */
     --edittext-border-1: #b50003;
     --edittext-bg-1: #ffffff;
   }
 }
 
 @layer utilities {
-  /* Global */
   .bg-global-1 {
     background-color: var(--global-bg-1);
   }
@@ -47,7 +43,6 @@
     color: var(--button-text-1);
   }
 
-  /* EditText */
   .border-edittext-1 {
     border-color: var(--edittext-border-1);
   }

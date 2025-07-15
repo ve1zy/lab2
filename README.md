@@ -50,20 +50,22 @@ Zencount Web Panel - это веб-приложение для монитори�
 	```
 ## Структура проекта
 ```
-nextjs-js-tailwind/
-├── public/             # Статические файлы
 ├── src/
-│   ├── app/            # Компоненты маршрутизации приложения
-│   │   ├── dashboard/  # Компоненты панели управления
-│   │   ├── login/      # Страница авторизации
-│   │   ├── layout.tsx  # Корневой компонент макета
-│   │   └── page.tsx    # Главная страница
-│   ├── components/     # Повторно используемые компоненты UI
-│   ├── styles/         # Глобальные стили и конфигурация Tailwind
-├── next.config.mjs     # Конфигурация Next.js
-├── package.json        # Зависимости проекта и скрипты
-├── postcss.config.js   # Конфигурация PostCSS
-└── tailwind.config.js  # Конфигурация Tailwind CSS
+│ ├── app/
+│ │ ├── layout.tsx
+│ │ ├── login/
+│ │ └── dashboard/
+│ ├── components/
+│ │ ├── ui/
+│ │ └── dashboard/
+│ ├── hooks/
+│ └── styles/
+├── middleware.ts
+├── next.config.mjs
+├── package.json
+├── postcss.config.js
+├── tailwind.config.js
+└── tsconfig.json
 ```
 ## Инструкция по использованию
 ### Авторизация
