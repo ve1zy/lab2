@@ -1,3 +1,4 @@
+// src/components/common/Sidebar.tsx
 'use client';
 import React from 'react';
 import Image from 'next/image';
@@ -11,7 +12,7 @@ interface MenuItem {
 }
 
 interface SidebarProps {
-  menuItems?: MenuItem[];
+  menuItems: MenuItem[]; // Убираем значение по умолчанию
   logoSrc?: string;
   logoAlt?: string;
   className?: string;
@@ -19,11 +20,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
-  menuItems = [
-    { id: 'dashboard', label: 'Дашборд', href: '/dashboard', active: true },
-    { id: 'settings', label: 'Настройки', href: '/settings' },
-    { id: 'logout', label: 'Выйти', onClick: () => handleLogout() },
-  ],
+  menuItems,
   logoSrc = '/images/img_sidebar_logo.svg',
   logoAlt = 'Logo',
   className = '',
@@ -32,24 +29,10 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const handleMenuClick = (item: MenuItem) => {
     if (item.onClick) {
-      item.onClick();
+      item.onClick(); // Вызываем onClick, если он определен
     }
     if (onMenuItemClick) {
-      onMenuItemClick(item);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await fetch('http://localhost:8000/logout/', {
-        method: 'POST',
-        credentials: 'include', // Важно для отправки cookies
-      });
-      document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      document.cookie = 'refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      window.location.href = '/login';
-    } catch (err) {
-      console.error('Ошибка при выходе:', err);
+      onMenuItemClick(item); // Вызываем внешний обработчик, если он передан
     }
   };
 
